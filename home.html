@@ -1,0 +1,239 @@
+\u003C!DOCTYPE html>
+\u003Chtml lang=\"zh-CN\">
+\u003Chead>
+\u003Cmeta charset=\"UTF-8\">
+\u003Cmeta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no\">
+\u003Ctitle>死神动态主页\u003C/title>
+\u003Cstyle>
+  \\* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif;
+    background: #ffffff;
+    color: #1a1a1a;
+  }
+
+  /\\* 背景层 \\*/
+  .bg {
+    position: fixed;
+    inset: 0;
+    z-index: -2;
+  }
+  .bg-item {
+    position: absolute;
+    inset: 0;
+    background-image: url('./ichigo.jpg'); /\\* 你的图片名 \\*/
+    background-size: contain;
+    background-position: center center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 1.5s ease-in-out;
+    animation: float 6s ease-in-out infinite alternate;
+  }
+  .bg-item.active {
+    opacity: 1;
+  }
+  @keyframes float {
+    0%   { transform: translateY(0px) scale(1); }
+    100% { transform: translateY(-12px) scale(1.02); }
+  }
+
+  /\\* 容器 \\*/
+  .container {
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 60px 24px 40px;
+  }
+
+  /\\* 顶部时间和日期 \\*/
+  .top-section {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  /\\* ⭐ 时间特效核心部分 ⭐ \\*/
+  .time {
+    /\\* 使用等宽字体，确保秒数跳动时不会左右晃 \\*/
+    font-family: 'Courier New', Courier, monospace, -apple-system;
+    font-variant-numeric: tabular-nums; /\\* 数字等宽 \\*/
+    font-size: 52px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    color: #ffffff; /\\* 白色文字 \\*/
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4); /\\* 阴影增强立体感 \\*/
+    
+    /\\* 半透明底托（类似截图里黑色半透明药丸） \\*/
+    background: rgba(0, 0, 0, 0.35); 
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    padding: 6px 24px;
+    border-radius: 50px; /\\* 圆角药丸形状 \\*/
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    display: inline-block;
+    margin-bottom: 12px;
+  }
+  
+  .date {
+    font-size: 15px;
+    color: #333;
+    font-weight: 500;
+    text-shadow: 0 1px 6px rgba(255, 255, 255, 0.9);
+  }
+
+  /\\* 底部区域 \\*/
+  .bottom-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /\\* 搜索框 \\*/
+  .search {
+    width: 100%;
+    max-width: 460px;
+    display: flex;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  .search input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #000;
+    font-size: 16px;
+    padding: 15px 20px;
+  }
+  .search input::placeholder {
+    color: rgba(0, 0, 0, 0.45);
+  }
+  .search button {
+    border: none;
+    background: transparent;
+    color: #000;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /\\* 快捷图标 \\*/
+  .links {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+  }
+  .link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: #1a1a1a;
+  }
+  .link .icon {
+    width: 52px;
+    height: 52px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: bold;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  }
+  .link span {
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  @media (max-width: 480px) {
+    .time { font-size: 42px; padding: 6px 18px; }
+    .links { gap: 10px; }
+    .link .icon { width: 46px; height: 46px; font-size: 18px; }
+  }
+\u003C/style>
+\u003C/head>
+\u003Cbody>
+
+\u003Cdiv class=\"bg\">
+  \u003Cdiv class=\"bg-item active\">\u003C/div>
+\u003C/div>
+
+\u003Cdiv class=\"container\">
+  \u003Cdiv class=\"top-section\">
+    \u003C!-- 这里显示 时:分:秒 -->
+    \u003Cdiv class=\"time\" id=\"time\">00:00:00\u003C/div>
+    \u003Cdiv class=\"date\" id=\"date\">加载中...\u003C/div>
+  \u003C/div>
+
+  \u003Cdiv class=\"bottom-section\">
+    \u003Cform class=\"search\" action=\"https://www.baidu.com/s\" method=\"get\">
+      \u003Cinput type=\"text\" name=\"wd\" placeholder=\"搜索...\" autocomplete=\"off\">
+      \u003Cbutton type=\"submit\">搜索\u003C/button>
+    \u003C/form>
+
+    \u003Cdiv class=\"links\">
+      \u003Ca class=\"link\" href=\"https://www.baidu.com\" target=\"\\_blank\">
+        \u003Cdiv class=\"icon\">百\u003C/div>\u003Cspan>百度\u003C/span>
+      \u003C/a>
+      \u003Ca class=\"link\" href=\"https://www.zhihu.com\" target=\"\\_blank\">
+        \u003Cdiv class=\"icon\">知\u003C/div>\u003Cspan>知乎\u003C/span>
+      \u003C/a>
+      \u003Ca class=\"link\" href=\"https://www.bilibili.com\" target=\"\\_blank\">
+        \u003Cdiv class=\"icon\">B\u003C/div>\u003Cspan>B站\u003C/span>
+      \u003C/a>
+      \u003Ca class=\"link\" href=\"https://www.taobao.com\" target=\"\\_blank\">
+        \u003Cdiv class=\"icon\">淘\u003C/div>\u003Cspan>淘宝\u003C/span>
+      \u003C/a>
+    \u003C/div>
+  \u003C/div>
+\u003C/div>
+
+\u003Cscript>
+  // ⭐ 核心：实时更新时间（包含秒）
+  function updateTime() {
+    const now = new Date();
+    const h = String(now.getHours()).padStart(2, '0');
+    const m = String(now.getMinutes()).padStart(2, '0');
+    const s = String(now.getSeconds()).padStart(2, '0');
+    
+    // 拼成 16:05:59 这种格式
+    document.getElementById('time').textContent = \\`${h}:${m}:${s}\\`;
+
+    const week = \\['星期日','星期一','星期二','星期三','星期四','星期五','星期六'\\]\\[now.getDay()\\];
+    document.getElementById('date').textContent =
+      \\`${now.getFullYear()}年${now.getMonth() + 1}月${now.getDate()}日 ${week}\\`;
+  }
+
+  // 立即执行一次，然后每秒执行一次（让秒数跳动）
+  updateTime();
+  setInterval(updateTime, 1000);
+\u003C/script>
+
+\u003C/body>
+\u003C/html>
